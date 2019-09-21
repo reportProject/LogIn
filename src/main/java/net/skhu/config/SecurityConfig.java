@@ -1,6 +1,7 @@
 package net.skhu.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import net.skhu.service.MyAuthenticationProvider;
 
+//spring security 설정을 위한 Java Config 클래스
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -16,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/res/**");
+		web.ignoring().antMatchers("/res/**"); // /res/** 패턴의 URL은 보안 검사를 하지 말고 무시하라는 설정
 	}
 
 	@Override

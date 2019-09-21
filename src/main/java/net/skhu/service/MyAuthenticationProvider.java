@@ -14,12 +14,16 @@ import org.springframework.stereotype.Component;
 
 import net.skhu.domain.User;
 
+/*MyAuthenticationProvier 클래스는
+ 
+사용자가 입력한 로그인 아이디와 비밀번호를 검사할 때 사용되는 클래스이다.*/
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
 	UserService userService;
 
+	/* 사용자가 입력한 로그인 아이디와 비밀번호가 authenticate 메소드의 파라미터로 전달된다. */
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String loginId = authentication.getName();
@@ -30,7 +34,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(String loginId, String password) throws AuthenticationException {
 		User user = userService.login(loginId, password);
 		if (user == null)
-			return null;
+			return null; //검사가 실패하면 null을 리턴한다.
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		String role = "";
