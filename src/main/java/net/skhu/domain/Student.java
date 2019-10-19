@@ -17,6 +17,21 @@ import java.util.List;
 @Table(name = "student")
 public class Student extends Person {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int student_no;
+	
+	String student_id;
+	String student_name;
+	
+	String student_email;
+	String student_phone;
+	
+	String password;
+	String password_question;
+	String password_answer;
+	
+	
     @ManyToOne
     @JoinColumn(name = "department_no")
     private Department department;
