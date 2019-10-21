@@ -15,7 +15,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import net.skhu.model.BaseEntity;
 
 @Entity
-@Table(name = "comment")
 public class Comment extends BaseEntity {
 
     private Integer depth;
@@ -26,9 +25,9 @@ public class Comment extends BaseEntity {
     private LocalDate submitDate;
 
     @ManyToOne
-    @JoinColumn(name = "professor_notice_no")
+    @JoinColumn(name = "notice_no")
     private ProfessorNotice professorNotice;
 
-    @OneToMany(mappedBy = "comment")
-    private List<Comment> commentList = new ArrayList<>();
+//    @OneToMany(mappedBy = "comment")
+//    private List<Comment> commentList = new ArrayList<>();
 }

@@ -21,9 +21,9 @@ import net.skhu.model.BaseEntity;
 @Data
 @Entity
 public class Ta extends BaseEntity {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int ta_no;
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	int ta_no;
 	
 	String ta_id;
 	

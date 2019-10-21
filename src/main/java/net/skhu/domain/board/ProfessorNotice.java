@@ -12,12 +12,13 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import net.skhu.domain.Professor;
 import net.skhu.domain.lecture.Lecture;
 import net.skhu.model.BaseBoard;
 
 @Entity
-@Table(name = "professor_notice")
 public class ProfessorNotice extends BaseBoard {
 
     private String header;
@@ -43,6 +44,8 @@ public class ProfessorNotice extends BaseBoard {
     @JoinColumn(name = "hw_No")
     private Homework homework;
 
-    @OneToMany(mappedBy = "comment")
+    @JsonIgnore
+    @OneToMany(mappedBy = "professorNotice")
     private List<Comment> commentList = new ArrayList<>();
 }
+

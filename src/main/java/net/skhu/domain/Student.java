@@ -17,9 +17,9 @@ import java.util.List;
 @Table(name = "student")
 public class Student extends Person {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int student_no;
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	int student_no;
 	
 	String student_id;
 	String student_name;

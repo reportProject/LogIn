@@ -7,13 +7,14 @@ import javax.persistence.Table;
 import net.skhu.domain.Professor;
 import net.skhu.domain.lecture.Lecture;
 
-@Table(name = "professor_lecture")
-public class ProfessorLecture {
-    @JoinColumn(name = "professor_no")
-    @ManyToOne
-    private Professor professor;
 
+public class ProfessorLecture {
+	
+	@ManyToOne
+    @JoinColumn(name = "professor_no")
+    private Professor professor;
+	
+	@ManyToOne
     @JoinColumn(name = "lecture_no")
-    @ManyToOne
     private Lecture lecture;
 }
