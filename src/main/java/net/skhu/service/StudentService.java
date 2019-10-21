@@ -11,7 +11,12 @@ import net.skhu.utils.EncryptionUtils;
 public class StudentService {
 
 	@Autowired StudentRepository studentRepository;
-	
+
+	/*
+	 * login 메소드
+	 * 
+	 * 사용자가 입력한 로그인 아이디와 비밀번호를 검사하는 메소드
+	 */
 	public Student login(String student_id, String password) {
 		Student student = studentRepository.findOneByStudent_id(student_id);
 		if(student == null) {

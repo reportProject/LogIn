@@ -1,6 +1,7 @@
 package net.skhu.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import net.skhu.domain.User;
+import lombok.Getter;
+import lombok.Setter;
+import net.skhu.domain.Professor;
+import net.skhu.domain.Student;
+import net.skhu.domain.Ta;
 
 /*MyAuthenticationProvier 클래스는
  
@@ -21,7 +26,11 @@ import net.skhu.domain.User;
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
 	@Autowired
-	UserService userService;
+	StudentService studentService;
+	@Autowired
+	ProfessorService professorService;
+	@Autowired
+	TaService taService;
 
 	/* 사용자가 입력한 로그인 아이디와 비밀번호가 authenticate 메소드의 파라미터로 전달된다. */
 	@Override
@@ -32,28 +41,44 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	public Authentication authenticate(String loginId, String password) throws AuthenticationException {
-		User user = userService.login(loginId, password);
-		if (user == null)
-			return null; //검사가 실패하면 null을 리턴한다.
+		Student student = studentService.login(loginId, password);
+		if (student == null) {
+			return null; // 검사가 실패하면 null을 리턴한다.
+		}
+		Professor professor = professorService.login(loginId, password);
+		if (professor == null) {
+			return null;
+		}
+		Ta ta = taService.login(loginId, password);
+		if (ta == null) {
+			return null;
+		}
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		String role = "";
-		switch (user.getUserType()) {
-		case "관리자":
-			role = "ROLE_ADMIN";
-			break;
-		case "교수":
-			role = "ROLE_PROFESSOR";
-			break;
-		case "학생":
+		if (student != null) {
 			role = "ROLE_STUDENT";
-			break;
-		case "TA":
+		} else if (professor != null) {
+			role = "ROLE_PROFESSOR";
+		} else {
 			role = "ROLE_TA";
-			break;
 		}
+//		switch (user.getUserType()) {
+//		case "관리자":
+//			role = "ROLE_ADMIN";
+//			break;
+//		case "교수":
+//			role = "ROLE_PROFESSOR";
+//			break;
+//		case "학생":
+//			role = "ROLE_STUDENT";
+//			break;
+//		case "TA":
+//			role = "ROLE_TA";
+//			break;
+//		}
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
-		return new MyAuthenticaion(loginId, password, grantedAuthorities, user);
+		return new MyAuthenticaion(loginId, password, grantedAuthorities, student, professor, ta);
 	}
 
 	@Override
@@ -63,19 +88,41 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
 	public class MyAuthenticaion extends UsernamePasswordAuthenticationToken {
 		private static final long serialVersionUID = 1L;
-		User user;
+		Student student;
+		Professor professor;
+		Ta ta;
 
-		public MyAuthenticaion(String loginId, String passwd, List<GrantedAuthority> grantedAuthorities, User user) {
-			super(loginId, passwd, grantedAuthorities);
-			this.user = user;
+		public MyAuthenticaion(String loginId, String password, List<GrantedAuthority> grantedAuthorities,
+				Student student, Professor professor, Ta ta) {
+			super(loginId, password, grantedAuthorities);
+			this.student = student;
+			this.professor = professor;
+			this.ta = ta;
 		}
 
-		public User getUser() {
-			return user;
+		public Student getStudent() {
+			return student;
 		}
 
-		public void setUser(User user) {
-			this.user = user;
+		public void setStudent(Student student) {
+			this.student = student;
 		}
+
+		public Professor getProfessor() {
+			return professor;
+		}
+
+		public void setProfessor(Professor professor) {
+			this.professor = professor;
+		}
+
+		public Ta getTa() {
+			return ta;
+		}
+
+		public void setTa(Ta ta) {
+			this.ta = ta;
+		}
+
 	}
 }
