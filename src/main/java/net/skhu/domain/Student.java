@@ -3,6 +3,7 @@ package net.skhu.domain;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import net.skhu.domain.board.Homework;
 import net.skhu.domain.board.StudentNotice;
 import net.skhu.domain.department.Department;
@@ -13,24 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name = "student")
 public class Student extends Person {
 
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	int student_no;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int student_no;
 	
 	String student_id;
 	String student_name;
-	
 	String student_email;
 	String student_phone;
-	
 	String password;
-	String password_question;
-	String password_answer;
 	
+	@Column(insertable = false, updatable = false)
+	String password_question;
+	@Column(insertable = false, updatable = false)
+	String password_answer;
 	
     @ManyToOne
     @JoinColumn(name = "department_no")

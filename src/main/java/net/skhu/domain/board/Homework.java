@@ -9,9 +9,11 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Data;
 import net.skhu.domain.Student;
 import net.skhu.model.BaseEntity;
 
+@Data
 @Entity
 @Table(name = "homework")
 public class Homework extends BaseEntity {

@@ -1,19 +1,27 @@
 package net.skhu.domain.relationship;
 
+import java.io.Serializable;
+
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import net.skhu.domain.Student;
 import net.skhu.domain.lecture.Lecture;
 
-@Table(name = "student_lecture")
-public class StudentLecture {
-    @JoinColumn(name = "student_no")
+@Entity
+public class StudentLecture implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @ManyToOne
+    @JoinColumn(name = "student_no")
     private Student student;
 
-    @JoinColumn(name = "lecture_no")
     @ManyToOne
+    @JoinColumn(name = "lecture_no")
     private Lecture lecture;
 }

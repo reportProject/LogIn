@@ -15,15 +15,19 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import net.skhu.domain.lecture.Lecture;
 import net.skhu.model.BaseEntity;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
 public class Ta extends BaseEntity {
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	int ta_no;
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int ta_no;
 	
 	String ta_id;
 	
@@ -34,11 +38,11 @@ public class Ta extends BaseEntity {
     
     private String password;
 
-    @Column(name = "password_question")
+    @Column(insertable = false, updatable = false, name = "password_question")
     @NotNull
     private String passwordQuestion;
 
-    @Column(name = "password_answer")
+    @Column(insertable = false, updatable = false, name = "password_answer")
     @NotNull
     private String passwordAnswer;
 
