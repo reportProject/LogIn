@@ -41,16 +41,16 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		return authenticate(loginId, passwd);
 	}
 
-	public Authentication authenticate(String loginId, String password) throws AuthenticationException {
-		Student student = studentService.login(loginId, password);
+	public Authentication authenticate(String login_id, String password) throws AuthenticationException {
+		Student student = studentService.login(login_id, password);
 		if (student == null) {
 			return null; // 검사가 실패하면 null을 리턴한다.
 		}
-		Professor professor = professorService.login(loginId, password);
+		Professor professor = professorService.login(login_id, password);
 		if (professor == null) {
 			return null;
 		}
-		Ta ta = taService.login(loginId, password);
+		Ta ta = taService.login(login_id, password);
 		if (ta == null) {
 			return null;
 		}
@@ -79,7 +79,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 //			break;
 //		}
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
-		return new MyAuthenticaion(loginId, password, grantedAuthorities, student, professor, ta);
+		return new MyAuthenticaion(login_id, password, grantedAuthorities, student, professor, ta);
 	}
 
 	@Override
@@ -93,9 +93,9 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		Professor professor;
 		Ta ta;
 
-		public MyAuthenticaion(String loginId, String password, List<GrantedAuthority> grantedAuthorities,
+		public MyAuthenticaion(String login_id, String password, List<GrantedAuthority> grantedAuthorities,
 				Student student, Professor professor, Ta ta) {
-			super(loginId, password, grantedAuthorities);
+			super(login_id, password, grantedAuthorities);
 			this.student = student;
 			this.professor = professor;
 			this.ta = ta;

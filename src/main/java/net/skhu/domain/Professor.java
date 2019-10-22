@@ -15,8 +15,13 @@ import java.util.List;
 @Data
 @Entity
 public class Professor extends Person {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int professor_no;
+	
     @NotNull
-    private String professorId;
+    private String professor_id;
 
     private String professorEmail;
 

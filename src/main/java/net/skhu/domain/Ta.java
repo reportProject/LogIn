@@ -14,6 +14,9 @@ import java.util.List;
 @Data
 @Entity
 public class Ta extends BaseEntity {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int ta_no;
 
     @Column(name = "ta_id")
     @NotNull

@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
 import net.skhu.board.Homework;
 import net.skhu.board.StudentNotice;
 import net.skhu.department.Department;
@@ -14,17 +15,28 @@ import net.skhu.relationship.StudentLecture;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "student")
 public class Student extends Person {
 
-    @NotNull
-    private String studentId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private String studentEmail;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int student_no;
+	
+	@NotNull
+	
+    private String student_id;
+
+    private String student_email;
 
     @NotNull
-    private String studentName;
+    private String student_name;
 
     @Digits(integer = 11, fraction = 0)
     private String studentPhone;

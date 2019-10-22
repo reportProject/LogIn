@@ -15,6 +15,10 @@ import java.util.List;
 @Entity
 public class Lecture extends BaseEntity {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int lecture_no;
+	
     private String lectureName;
 
     private String lectureType;

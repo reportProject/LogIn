@@ -1,6 +1,9 @@
 package net.skhu.department;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,6 +17,11 @@ import java.util.List;
 @Entity
 @Table(name = "department")
 public class Department extends BaseEntity {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int department_no;
+	
     private String departmentName;
 
     @OneToMany(mappedBy = "department")

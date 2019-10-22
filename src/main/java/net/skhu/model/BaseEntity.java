@@ -9,11 +9,11 @@ import java.io.Serializable;
 
 @MappedSuperclass
 public class BaseEntity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer no;
-
-    public boolean isNew(){
-        return this.no == 0;
-    }
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer no;
+//
+//    public boolean isNew(){
+//        return this.no == 0;
+//    }
 }

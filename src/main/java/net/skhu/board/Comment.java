@@ -13,6 +13,10 @@ import java.util.List;
 @Entity
 public class Comment extends BaseEntity {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	int comment_no;
+	
     private Integer depth;
 
     private String content;
