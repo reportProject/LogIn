@@ -3,13 +3,14 @@ package net.skhu.domain;
 import java.util.ArrayList;
 
 
+
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -30,12 +31,17 @@ import net.skhu.model.Person;
 public class Professor extends Person {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int professor_no;
 	
 	String professor_id;
 	String professor_name;
+	
+	@ManyToOne
+    @JoinColumn(name = "department_no")
+    private Department department;
+	
 	String professor_email;
 	String professor_phone;
 	String password;
@@ -45,14 +51,10 @@ public class Professor extends Person {
 	
 	@Column(insertable = false, updatable = false)
 	String password_answer;
-	
-    @ManyToOne
-    @JoinColumn(name = "department_no")
-    private Department department;
 
-    @JsonIgnore
+    
     @OneToOne(mappedBy = "professor")
-    private List<Ta> ta;
+    private List<Ta> ta = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "professor")

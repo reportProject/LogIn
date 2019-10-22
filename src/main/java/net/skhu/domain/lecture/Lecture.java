@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.skhu.domain.Professor;
 import net.skhu.domain.Ta;
 import net.skhu.domain.board.ProfessorNotice;
 import net.skhu.domain.board.StudentNotice;
@@ -37,7 +38,7 @@ public class Lecture extends BaseEntity {
     private List<ProfessorNotice> professorNoticeList = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "professor_no")
+    @JoinColumn(name = "ta_no")
     private Ta ta;
 
 }

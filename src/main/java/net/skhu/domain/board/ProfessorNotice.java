@@ -32,8 +32,8 @@ public class ProfessorNotice extends BaseBoard {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int notice_no;
 
 	@ManyToOne

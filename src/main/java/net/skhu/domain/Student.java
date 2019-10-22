@@ -19,8 +19,8 @@ import java.util.List;
 public class Student extends Person {
 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int student_no;
 	
 	String student_id;
