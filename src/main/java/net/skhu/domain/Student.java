@@ -1,39 +1,34 @@
 package net.skhu.domain;
 
-import javax.persistence.*;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import net.skhu.domain.board.Homework;
-import net.skhu.domain.board.StudentNotice;
-import net.skhu.domain.department.Department;
-import net.skhu.domain.relationship.StudentLecture;
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+
+import net.skhu.board.Homework;
+import net.skhu.board.StudentNotice;
+import net.skhu.department.Department;
 import net.skhu.model.Person;
+import net.skhu.relationship.StudentLecture;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@EqualsAndHashCode(callSuper=false)
 @Entity
+@Table(name = "student")
 public class Student extends Person {
 
-	private static final long serialVersionUID = 1L;
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int student_no;
-	
-	String student_id;
-	String student_name;
-	String student_email;
-	String student_phone;
-	String password;
-	
-	@Column(insertable = false, updatable = false)
-	String password_question;
-	@Column(insertable = false, updatable = false)
-	String password_answer;
-	
+    @NotNull
+    private String studentId;
+
+    private String studentEmail;
+
+    @NotNull
+    private String studentName;
+
+    @Digits(integer = 11, fraction = 0)
+    private String studentPhone;
+
     @ManyToOne
     @JoinColumn(name = "department_no")
     private Department department;

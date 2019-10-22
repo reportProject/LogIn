@@ -1,66 +1,41 @@
 package net.skhu.domain;
 
-import java.util.ArrayList;
-
-
-
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import net.skhu.domain.board.ProfessorNotice;
-import net.skhu.domain.department.Department;
-import net.skhu.domain.relationship.ProfessorLecture;
+import net.skhu.board.ProfessorNotice;
+import net.skhu.department.Department;
 import net.skhu.model.Person;
+import net.skhu.relationship.ProfessorLecture;
 
+import java.util.ArrayList;
+import java.util.List;
 @Data
-@EqualsAndHashCode(callSuper=false)
 @Entity
 public class Professor extends Person {
-	private static final long serialVersionUID = 1L;
+    @NotNull
+    private String professorId;
 
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int professor_no;
-	
-	String professor_id;
-	String professor_name;
-	
-	@ManyToOne
+    private String professorEmail;
+
+    @NotNull
+    private String professorName;
+
+    @Digits(integer = 11, fraction = 0)
+    private String professorPhone;
+
+    @ManyToOne
     @JoinColumn(name = "department_no")
     private Department department;
-	
-	String professor_email;
-	String professor_phone;
-	String password;
-	
-	@Column(insertable = false, updatable = false)
-	String password_question;
-	
-	@Column(insertable = false, updatable = false)
-	String password_answer;
 
-    
     @OneToOne(mappedBy = "professor")
-    private List<Ta> ta = new ArrayList<>();
+    private Ta ta;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<ProfessorLecture> professorLectureList = new ArrayList<>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<ProfessorNotice> professorNoticeList = new ArrayList<>();
 
