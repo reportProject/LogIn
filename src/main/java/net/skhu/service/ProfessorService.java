@@ -13,8 +13,8 @@ public class ProfessorService {
 	@Autowired
 	ProfessorRepository professorRepository;
 
-	public Professor login(String professor_id, String password) {
-		Professor professor = professorRepository.findOneByProfessor_id(professor_id);
+	public Professor login(String professorId, String password) {
+		Professor professor = professorRepository.findOneByProfessorId(professorId);
 		if (professor == null) {
 			return null;
 		}

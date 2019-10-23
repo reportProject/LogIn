@@ -7,5 +7,5 @@ import net.skhu.domain.Professor;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Integer>{
 
-	Professor findOneByProfessor_id(String professor_id);
+	Professor findOneByProfessorId(String professorId);
 }

@@ -2,6 +2,7 @@ package net.skhu.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,8 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int student_no;
 	
-	String student_id;
+	@Column(name="student_id")
+	String studentId;
 	String student_name;
 	String student_email;
 	String student_phone;

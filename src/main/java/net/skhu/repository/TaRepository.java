@@ -6,5 +6,5 @@ import net.skhu.domain.Ta;
 
 public interface TaRepository extends JpaRepository<Ta, Integer>{
 
-	Ta findOneByTa_id(String ta_id);
+	Ta findOneByTaId(String taId);
 }

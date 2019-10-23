@@ -7,7 +7,7 @@ import net.skhu.domain.Student;
 import net.skhu.repository.StudentRepository;
 import net.skhu.utils.EncryptionUtils;
 
-@Service
+@Service("studentService")
 public class StudentService {
 
 	@Autowired StudentRepository studentRepository;
@@ -17,8 +17,8 @@ public class StudentService {
 	 * 
 	 * 사용자가 입력한 로그인 아이디와 비밀번호를 검사하는 메소드
 	 */
-	public Student login(String student_id, String password) {
-		Student student = studentRepository.findOneByStudent_id(student_id);
+	public Student login(String studentId, String password) {
+		Student student = studentRepository.findOneByStudentId(studentId);
 		if(student == null) {
 			return null;
 		}

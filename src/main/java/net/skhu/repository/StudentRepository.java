@@ -1,10 +1,12 @@
 package net.skhu.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import net.skhu.domain.Student;
 
+@Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	Student findOneByStudent_id(String student_id);
+	Student findOneByStudentId(String studentId);
 }

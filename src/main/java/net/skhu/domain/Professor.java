@@ -2,7 +2,7 @@ package net.skhu.domain;
 
 import java.util.List;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +29,8 @@ public class Professor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int professor_no;
 	
-	String professor_id;
+	@Column(name="professor_id")
+	String professorId;
 	String professor_name;
 	String professor_email;
 	String professor_phone;

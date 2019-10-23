@@ -1,5 +1,6 @@
 package net.skhu.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class Ta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int ta_no;
 	
-	String ta_id;
+	@Column(name="ta_id")
+	String taId;
 	
 	String password;
 	String password_question;

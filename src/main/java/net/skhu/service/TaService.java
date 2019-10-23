@@ -12,8 +12,8 @@ public class TaService {
 
 	@Autowired TaRepository taRepository;
 	
-	public Ta login(String ta_id, String password) {
-		Ta ta = taRepository.findOneByTa_id(ta_id);
+	public Ta login(String taId, String password) {
+		Ta ta = taRepository.findOneByTaId(taId);
 		if(ta == null) {
 			return null;
 		}
