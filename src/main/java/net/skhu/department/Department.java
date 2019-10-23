@@ -1,32 +1,39 @@
 package net.skhu.department;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import net.skhu.domain.Professor;
 import net.skhu.domain.Student;
-import net.skhu.model.BaseEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Data
+@ToString(exclude={"professors","students"})
+@EqualsAndHashCode(exclude={"professors","students"})
 @Entity
-@Table(name = "department")
-public class Department extends BaseEntity {
+public class Department {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int department_no;
 	
-    private String departmentName;
+	String department_name;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="department")
+	List<Professor> professors;
 
-    @OneToMany(mappedBy = "department")
-    private List<Student> studentList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "department")
-    private List<Professor> professorList = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(mappedBy="department")
+	List<Student> students;
+	
 }

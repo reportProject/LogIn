@@ -2,6 +2,8 @@ package net.skhu.board;
 
 import java.util.Date;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,30 +14,27 @@ import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import net.skhu.domain.Student;
+import net.skhu.lecture.Lecture;
 
 @Data
-@ToString(exclude={"professor_notice"})
-@EqualsAndHashCode(exclude={"professor_notice"})
+@ToString(exclude={"lecture","student"})
+@EqualsAndHashCode(exclude={"lecture","student"})
 @Entity
-public class Comment {
-
+public class Student_notice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int comment_no;
+	int studentnotice_no;
 	
-	Date notice_date;
-	int depth;
-	int parent;
-	int content;
+	String title;
+	Long content;
+	Date submitdate;
 	
 	@ManyToOne
-	@JoinColumn(name = "notice_no")
-	Professor_notice professor_notice;
+	@JoinColumn(name = "lecture_no")
+	Lecture lecture;
 	
-	/*************
 	@ManyToOne
-	@JoinColumn(name = "comment_no")
-	comment comment;
-	****************/
-	
+	@JoinColumn(name = "student_no")
+	Student student;
 }

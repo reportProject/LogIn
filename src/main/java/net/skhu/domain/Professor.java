@@ -1,47 +1,52 @@
 package net.skhu.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
+import java.util.List;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import net.skhu.board.ProfessorNotice;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import net.skhu.board.Professor_notice;
 import net.skhu.department.Department;
-import net.skhu.model.Person;
-import net.skhu.relationship.ProfessorLecture;
+import net.skhu.relationship.Professor_lecture;
 
-import java.util.ArrayList;
-import java.util.List;
 @Data
+@ToString(exclude={"department","professor_lectures","professor_notices"})
+@EqualsAndHashCode(exclude={"department","professor_lectures","professor_notices"})
 @Entity
-public class Professor extends Person {
-	
+public class Professor {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int professor_no;
 	
-    @NotNull
-    private String professor_id;
-
-    private String professorEmail;
-
-    @NotNull
-    private String professorName;
-
-    @Digits(integer = 11, fraction = 0)
-    private String professorPhone;
-
-    @ManyToOne
-    @JoinColumn(name = "department_no")
-    private Department department;
-
-    @OneToOne(mappedBy = "professor")
-    private Ta ta;
-
-    @OneToMany(mappedBy = "professor")
-    private List<ProfessorLecture> professorLectureList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "professor")
-    private List<ProfessorNotice> professorNoticeList = new ArrayList<>();
-
+	String professor_id;
+	String professor_name;
+	String professor_email;
+	String professor_phone;
+	String password;
+	String password_question;
+	String password_answer;
+	
+	@ManyToOne
+	@JoinColumn(name="department_no")
+	Department department;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "professor")
+	List<Professor_lecture> professor_lectures;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "professor")
+	List<Professor_notice> professor_notices;
+	
 }

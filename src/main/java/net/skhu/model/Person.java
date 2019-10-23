@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @MappedSuperclass
-public class Person extends BaseEntity {
+public class Person {
 
     @Column(name = "password")
     @NotNull

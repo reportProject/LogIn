@@ -1,8 +1,7 @@
-package net.skhu.board;
-
-import java.util.Date;
+package net.skhu.relationship;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,30 +11,23 @@ import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import net.skhu.domain.Student;
+import net.skhu.lecture.Lecture;
 
 @Data
-@ToString(exclude={"professor_notice"})
-@EqualsAndHashCode(exclude={"professor_notice"})
+@ToString(exclude={"student","lecture"})
+@EqualsAndHashCode(exclude={"student","lecture"})
 @Entity
-public class Comment {
-
+public class Student_lecture {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int comment_no;
-	
-	Date notice_date;
-	int depth;
-	int parent;
-	int content;
+	int student_lecture_no;
 	
 	@ManyToOne
-	@JoinColumn(name = "notice_no")
-	Professor_notice professor_notice;
+	@JoinColumn(name = "student_no")
+	Student student;
 	
-	/*************
 	@ManyToOne
-	@JoinColumn(name = "comment_no")
-	comment comment;
-	****************/
-	
+	@JoinColumn(name = "lecture_no")
+	Lecture lecture;
 }

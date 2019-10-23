@@ -1,22 +1,21 @@
 package net.skhu.authority;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
-import net.skhu.model.BaseEntity;
+
 @Data
 @Entity
-public class Authority extends BaseEntity {
+public class Authority {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int authority_no;
+	String student_authority;
+	String professor_authority;
+	String ta_authority;
 	
-    private String student_authority;
-    private String professor_authority;
-    private String ta_authority;
 }

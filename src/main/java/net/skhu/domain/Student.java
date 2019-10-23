@@ -1,56 +1,55 @@
 package net.skhu.domain;
 
-
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
-
-import lombok.Data;
-import net.skhu.board.Homework;
-import net.skhu.board.StudentNotice;
-import net.skhu.department.Department;
-import net.skhu.model.Person;
-import net.skhu.relationship.StudentLecture;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import net.skhu.board.Homework;
+import net.skhu.board.Student_notice;
+import net.skhu.department.Department;
+import net.skhu.relationship.Student_lecture;
+
 @Data
+@ToString(exclude={"department","student_lectures","student_notices","homeworks"})
+@EqualsAndHashCode(exclude={"department","student_lectures","student_notices","homeworks"})
 @Entity
-@Table(name = "student")
-public class Student extends Person {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+public class Student {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int student_no;
 	
-	@NotNull
+	String student_id;
+	String student_name;
+	String student_email;
+	String student_phone;
+	String password;
+	String password_question;
+	String password_answer;
 	
-    private String student_id;
-
-    private String student_email;
-
-    @NotNull
-    private String student_name;
-
-    @Digits(integer = 11, fraction = 0)
-    private String studentPhone;
-
-    @ManyToOne
-    @JoinColumn(name = "department_no")
-    private Department department;
-
-    @OneToMany(mappedBy = "student")
-    private List<StudentLecture> studentLectureList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "student")
-    private List<Homework> homeworkList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "student")
-    private List<StudentNotice> studentNoticeList = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="department_no")
+	Department department;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	List<Student_lecture> student_lectures;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	List<Student_notice> student_notices;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	List<Homework> homeworks;
 }
