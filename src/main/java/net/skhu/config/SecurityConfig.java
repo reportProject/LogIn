@@ -22,21 +22,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// /res/** 패턴의 URL은 보안 검사를 하지 말고 무시하라는 설정
 	}
 
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests() //권한 설정 시작
-		.antMatchers("/professor/**").access("ROLE_PROFESSOR") // /professor/** 패턴의 URL은 ROLE_PROFESSOR 권한을 소유한 사용자만 요청할 수 있다는 설정이다.
-		.antMatchers("/student/**").access("ROLE_STUDENT") // /student/** 패턴의 URL은 ROLE_STUDENT 권한을 소유한 사용자만 요청할 수 있다는 설정이다.
-		.antMatchers("/ta/**").access("ROLE_TA") // /ta/** 패턴의 URL은 ROLE_TA 권한을 소유한 사용자만 요청할 수 있다는 설정이다.
-		.antMatchers("/guest/**").permitAll() // /guest/** 패턴의 URL은 모든 사용자에게 허용된다는 설정이다. 로그인하지 않은 사용자에게도 허용된다.
-		.antMatchers("/").permitAll() // / URL 은 모든 사용자에게 허용된다는 설정이다. 로그인하지 않은 사용자에게도 허용된다
-		.antMatchers("/**").authenticated(); // /** 패턴의 URL은 로그인된 사용자에게만 허용된다는 설정이다.
+		.antMatchers("/professor/**").access("ROLE_PROFESSOR")
+		.antMatchers("/student/**").access("ROLE_STUDENT")
+		.antMatchers("/ta/**").access("ROLE_TA")
+		.antMatchers("/guest/**").permitAll()
+		.antMatchers("/").permitAll()
+				.antMatchers("/**").authenticated();
 
 		http.csrf().disable(); //CSRF 공격 검사를 하지 않겠다는 설정이다.
 
-		
-		
 		http.formLogin() //로그인 페이지 설정 시작
 		.loginPage("/guest/login") //로그인 페이지 URL 설정
 		.loginProcessingUrl("/guest/login_processing") //로그인 페이지에서 '로그인' 버튼(submit button)을 눌렀을 때 요청할 URL 설정
