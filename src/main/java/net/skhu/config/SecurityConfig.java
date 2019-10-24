@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/guest/login") //로그아웃된 후 넘어갈(redirect) URL 설정
 		.invalidateHttpSession(true); //로그아웃할 때, 세션(session)에 들어있는 데이터를 전부 지우라는 설정
 
+		////// 기능은 이하 동일
 		http.formLogin()
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
