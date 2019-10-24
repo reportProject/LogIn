@@ -1,8 +1,6 @@
 package net.skhu.service;
 
 import java.util.ArrayList;
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.skhu.domain.Professor;
 import net.skhu.domain.Student;
 import net.skhu.domain.Ta;
@@ -59,9 +55,11 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		String role = "";
 		if (student != null) {
 			role = "ROLE_STUDENT";
-		} else if (professor != null) {
+		}
+		if (professor != null) {
 			role = "ROLE_PROFESSOR";
-		} else {
+		}
+		if (ta != null) {
 			role = "ROLE_TA";
 		}
 //		switch (user.getUserType()) {

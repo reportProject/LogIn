@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class UserController {
+public class StudentController {
 
-    @RequestMapping("user/index")
+	@RequestMapping("student/index")
     public String index() {
-        return "user/index"; //로그인 한 사용자를 위한 첫 페이지 URL
+        return "student/index"; //로그인 student 사용자를 위한 첫 페이지 URL
     }
 }
