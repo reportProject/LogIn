@@ -53,15 +53,28 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		String role = "";
-		if (student != null) {
-			role = "ROLE_STUDENT";
+		List<Student> studentList=new ArrayList<>();
+		List<Professor> professorList=new ArrayList<>();
+		List<Ta> taList=new ArrayList<>();
+		for(Object check : studentList) {
+			if(check==student) {
+				role = "ROLE_STUDENT";
+			}
 		}
-		if (professor != null) {
-			role = "ROLE_PROFESSOR";
+		for(Object check : professorList) {
+			if(check==professor) {
+				role = "ROLE_PROFESSOR";
+			}
 		}
-		if (ta != null) {
-			role = "ROLE_TA";
+		for(Object check : taList) {
+			if(check==ta) {
+				role = "ROLE_TA";
+			}
 		}
+		/*
+		 * if (student != null) { role = "ROLE_STUDENT"; } if (professor != null) { role
+		 * = "ROLE_PROFESSOR"; } if (ta != null) { role = "ROLE_TA"; }
+		 */
 //		switch (user.getUserType()) {
 //		case "관리자":
 //			role = "ROLE_ADMIN";

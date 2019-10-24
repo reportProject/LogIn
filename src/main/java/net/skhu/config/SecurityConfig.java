@@ -59,6 +59,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutRequestMatcher(new AntPathRequestMatcher("/student/logout_processing"))
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
+		
+		http.formLogin()
+		.loginPage("/guest/login")
+		.loginProcessingUrl("/guest/login_processing")
+		.failureUrl("/guest/login?error")
+		.defaultSuccessUrl("/professor/index", true)
+		.usernameParameter("loginId")
+		.passwordParameter("passwd");
+		http.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/professor/logout_processing"))
+		.logoutSuccessUrl("/guest/login")
+		.invalidateHttpSession(true);
+		
+		http.formLogin()
+		.loginPage("/guest/login")
+		.loginProcessingUrl("/guest/login_processing")
+		.failureUrl("/guest/login?error")
+		.defaultSuccessUrl("/ta/index", true)
+		.usernameParameter("loginId")
+		.passwordParameter("passwd");
+		http.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/ta/logout_processing"))
+		.logoutSuccessUrl("/guest/login")
+		.invalidateHttpSession(true);
+		
 		http.authenticationProvider(myAuthenticationProvider);
 	}
 }
