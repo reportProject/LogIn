@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.invalidateHttpSession(true); //로그아웃할 때, 세션(session)에 들어있는 데이터를 전부 지우라는 설정
 
 		////// 기능은 이하 동일
-		http.formLogin()
+		http.formLogin() //학생
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
 		.failureUrl("/guest/login?error")
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
 		
-		http.formLogin()
+		http.formLogin() // 교수
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
 		.failureUrl("/guest/login?error")
@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
 		
-		http.formLogin()
+		http.formLogin() // ta
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
 		.failureUrl("/guest/login?error")
