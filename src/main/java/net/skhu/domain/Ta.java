@@ -29,6 +29,6 @@ public class Ta {
 	String password_answer;
 	
 	@OneToOne
-	@JoinColumn(name="professor_id")
+	@JoinColumn(name="professor_no")
 	Professor professor;
 }

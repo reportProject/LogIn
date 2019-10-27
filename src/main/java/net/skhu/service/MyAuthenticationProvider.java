@@ -39,46 +39,46 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
 	public Authentication authenticate(String loginId, String password) throws AuthenticationException {
 		Student student = studentService.login(loginId, password);
-		if (student == null) {
-			return null; // 검사가 실패하면 null을 리턴한다.
-		}
 		Professor professor = professorService.login(loginId, password);
-		if (professor == null) {
-			return null;
-		}
 		Ta ta = taService.login(loginId, password);
-		if (ta == null) {
-			return null;
-		}
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		String role = "";
-		List<Student> studentList=new ArrayList<>();
-		List<Professor> professorList=new ArrayList<>();
-		List<Ta> taList=new ArrayList<>();
-		for(Object check : studentList) {
-			if(check==student) {
-				role = "ROLE_STUDENT";
-				break;
-			}
+		
+		if (student != null) {
+			role = "ROLE_STUDENT";
+		}else if(professor != null) {
+			role = "ROLE_PROFESSOR";
+		}else if(ta != null) {
+			role = "ROLE_TA";
+		}else {
+			return null;
 		}
-		for(Object check : professorList) {
-			if(check==professor) {
-				role = "ROLE_PROFESSOR";
-				break;
-			}
-		}
-		for(Object check : taList) {
-			if(check==ta) {
-				role = "ROLE_TA";
-				break;
-			}
-		}
-		/*
-		 * if (student != null) { role = "ROLE_STUDENT"; } if (professor != null) { role
-		 * = "ROLE_PROFESSOR"; } if (ta != null) { role = "ROLE_TA"; }
-		 */
-//		switch (user.getUserType()) {
+//		List<Student> studentList=new ArrayList<>();
+//		List<Professor> professorList=new ArrayList<>();
+//		List<Ta> taList=new ArrayList<>();
+//		for(Object check : studentList) {
+//			if(check==student) {
+//				role = "ROLE_STUDENT";
+//				break;
+//			}
+//		}
+//		for(Object check : professorList) {
+//			if(check==professor) {
+//				role = "ROLE_PROFESSOR";
+//				break;
+//			}
+//		}
+//		for(Object check : taList) {
+//			if(check==ta) {
+//				role = "ROLE_TA";
+//				break;
+//			}
+//		}
+
+		
+
+		// switch (user.getUserType()) {
 //		case "관리자":
 //			role = "ROLE_ADMIN";
 //			break;

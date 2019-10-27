@@ -2,6 +2,7 @@ package net.skhu.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -21,7 +22,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/res/**"); 
 		// /res/** 패턴의 URL은 보안 검사를 하지 말고 무시하라는 설정
 	}
-
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -35,29 +35,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable(); //CSRF 공격 검사를 하지 않겠다는 설정이다.
 		
-		http.formLogin() //로그인 페이지 설정 시작
-		.loginPage("/guest/login") //로그인 페이지 URL 설정
-		.loginProcessingUrl("/guest/login_processing") //로그인 페이지에서 '로그인' 버튼(submit button)을 눌렀을 때 요청할 URL 설정
-		.failureUrl("/guest/login?error") //로그인이 실패했을 때 넘어갈(redirect) URL 설정
-		.defaultSuccessUrl("/user/index", true) //로그인이 성공했을 때 넘어갈(redirect) URL 설정
-		.usernameParameter("loginId")
-		.passwordParameter("passwd"); //로그인 페이지 (뷰 파일)에서 로그인 아이디 input 태그의 name 값과, 비밀번호 input 태그의 name 값 설정
-
-		http.logout() //로그아웃 설정 시작
-		.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout_processing")) //로그아웃 버튼이나 링크를 눌렀을 때 요청할 URL 설정
-		.logoutSuccessUrl("/guest/login") //로그아웃된 후 넘어갈(redirect) URL 설정
-		.invalidateHttpSession(true); //로그아웃할 때, 세션(session)에 들어있는 데이터를 전부 지우라는 설정
-
+		/*
+		 * http.formLogin() //로그인 페이지 설정 시작 .loginPage("/guest/login") //로그인 페이지 URL 설정
+		 * .loginProcessingUrl("/guest/login_processing") //로그인 페이지에서 '로그인' 버튼(submit
+		 * button)을 눌렀을 때 요청할 URL 설정 .failureUrl("/guest/login?error") //로그인이 실패했을 때
+		 * 넘어갈(redirect) URL 설정 .defaultSuccessUrl("/user/index", true) //로그인이 성공했을 때
+		 * 넘어갈(redirect) URL 설정 .usernameParameter("loginId")
+		 * .passwordParameter("passwd"); //로그인 페이지 (뷰 파일)에서 로그인 아이디 input 태그의 name 값과,
+		 * 비밀번호 input 태그의 name 값 설정
+		 * 
+		 * http.logout() //로그아웃 설정 시작 .logoutRequestMatcher(new
+		 * AntPathRequestMatcher("/user/logout_processing")) //로그아웃 버튼이나 링크를 눌렀을 때 요청할
+		 * URL 설정 .logoutSuccessUrl("/guest/login") //로그아웃된 후 넘어갈(redirect) URL 설정
+		 * .invalidateHttpSession(true); //로그아웃할 때, 세션(session)에 들어있는 데이터를 전부 지우라는 설정
+		 */
 		////// 기능은 이하 동일
 		http.formLogin() //학생
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
 		.failureUrl("/guest/login?error")
-		.defaultSuccessUrl("/student/index", true)
+		.defaultSuccessUrl("/user/index", true)
 		.usernameParameter("loginId")
 		.passwordParameter("passwd");
 		http.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/student/logout_processing"))
+		.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout_processing"))
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
 		
