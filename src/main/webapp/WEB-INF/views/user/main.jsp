@@ -39,7 +39,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <h7 class="mb-0 text-white lh-100">201732032 소프트웨어공학과 장은애&nbsp&nbsp</h7>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='loginform'">로그아웃</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='logout_processing'">로그아웃</button>
       </form>
     </div>
   </nav>
