@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
 		.failureUrl("/guest/login?error")
-		.defaultSuccessUrl("/user/index", true)
+		.defaultSuccessUrl("/user/main", true)
 		.usernameParameter("loginId")
 		.passwordParameter("passwd");
 		http.logout()
@@ -62,29 +62,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
 		
-		http.formLogin() // 교수
-		.loginPage("/guest/login")
-		.loginProcessingUrl("/guest/login_processing")
-		.failureUrl("/guest/login?error")
-		.defaultSuccessUrl("/professor/index", true)
-		.usernameParameter("loginId")
-		.passwordParameter("passwd");
-		http.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/professor/logout_processing"))
-		.logoutSuccessUrl("/guest/login")
-		.invalidateHttpSession(true);
-		
-		http.formLogin() // ta
-		.loginPage("/guest/login")
-		.loginProcessingUrl("/guest/login_processing")
-		.failureUrl("/guest/login?error")
-		.defaultSuccessUrl("/ta/index", true)
-		.usernameParameter("loginId")
-		.passwordParameter("passwd");
-		http.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/ta/logout_processing"))
-		.logoutSuccessUrl("/guest/login")
-		.invalidateHttpSession(true);
+//		http.formLogin() // 교수
+//		.loginPage("/professorGuest/login")
+//		.loginProcessingUrl("/professorGuest/login_processing")
+//		.failureUrl("/professorGuest/login?error")
+//		.defaultSuccessUrl("/professor/index", true)
+//		.usernameParameter("loginId")
+//		.passwordParameter("passwd");
+//		http.logout()
+//		.logoutRequestMatcher(new AntPathRequestMatcher("/professor/logout_processing"))
+//		.logoutSuccessUrl("/professorGuest/login")
+//		.invalidateHttpSession(true);
+//		
+//		http.formLogin() // ta
+//		.loginPage("/taGuest/login")
+//		.loginProcessingUrl("/taGuest/login_processing")
+//		.failureUrl("/taGuest/login?error")
+//		.defaultSuccessUrl("/ta/index", true)
+//		.usernameParameter("loginId")
+//		.passwordParameter("passwd");
+//		http.logout()
+//		.logoutRequestMatcher(new AntPathRequestMatcher("/ta/logout_processing"))
+//		.logoutSuccessUrl("/taGuest/login")
+//		.invalidateHttpSession(true);
 		
 		http.authenticationProvider(myAuthenticationProvider);
 	}

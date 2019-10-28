@@ -14,12 +14,13 @@ public class ProfessorService {
 	ProfessorRepository professorRepository;
 
 	public Professor login(String professorId, String password) {
-		Professor professor = professorRepository.findOneByProfessorId(professorId);
+		Professor professor = professorRepository.findByProfessorId(professorId);
 		if (professor == null) {
+			System.out.println("교수에 입력된 id 값은" + professorId);
 			return null;
 		}
-		String pw = EncryptionUtils.encryptMD5(password);
-		if (professor.getPassword().equals(pw) == false) {
+		String pw = password;
+		if (!professor.getPassword().equals(pw)) {
 			return null;
 		}
 		return professor;

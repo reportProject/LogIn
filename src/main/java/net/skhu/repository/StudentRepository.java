@@ -8,5 +8,6 @@ import net.skhu.domain.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	Student findOneByStudentId(String studentId);
+	Student findByStudentId(String studentId);
+
 }

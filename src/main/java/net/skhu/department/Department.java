@@ -3,6 +3,7 @@ package net.skhu.department;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,11 +30,11 @@ public class Department {
 	String department_name;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="department")
+	@OneToMany(mappedBy="department", fetch = FetchType.LAZY)
 	List<Professor> professors;
 
 	@JsonIgnore
-	@OneToMany(mappedBy="department")
+	@OneToMany(mappedBy="department", fetch = FetchType.LAZY)
 	List<Student> students;
 	
 }

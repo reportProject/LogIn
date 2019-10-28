@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>사용자 첫 페이지</h1>
+		<h1>TA 첫 페이지</h1>
 		<hr />
 
 		<table class="table table-bordered" style="width: 500px;">
@@ -24,16 +24,16 @@
 				<!-- 			현재 로그인된 사용자 객체의 loginId 속성값을 출력한다.
 				즉 User 객체의 getLoginId() 메소드 리턴값이 출력된다. -->
 				<td>로그인ID</td>
-				<td><sec:authentication property="student.studentId" /></td>
+				<td><sec:authentication property="ta.taId" /></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td>이름</td>
 				<td><sec:authentication property="student.student_name" /></td>
 			</tr>
 			<tr>
 				<td>이메일</td>
 				<td><sec:authentication property="student.student_email" /></td>
-			</tr>
+			</tr> --%>
 		</table>
 		<!-- "user/logout_processing" 부분은, SecurityConfig.java 에서 설정한, 로그아웃 처리 URL과 일치해야 한다. -->
 		<a class="btn btn-default" href="logout_processing">로그아웃</a>

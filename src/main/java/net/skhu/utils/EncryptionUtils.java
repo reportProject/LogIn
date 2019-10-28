@@ -18,11 +18,8 @@ public class EncryptionUtils {
 			 * messageDigest 파라미터
 			 * 
 			 * 이 파라미터는 암호화 알고리즘을 지정한다.
-			 * 
-			 * SHA-256 알고리즘이나 MD5 알고리즘을 지정할 수 있다.
-			 * 
-			 * SHA-256 알고리즘이 MD5 알고리즘보다 좀 더 강력하다.
-			 */			MessageDigest md = MessageDigest.getInstance(messageDigest);
+			 */ 
+			MessageDigest md = MessageDigest.getInstance(messageDigest);
 			byte[] passBytes = s.getBytes();
 			md.reset();
 			byte[] digested = md.digest(passBytes);

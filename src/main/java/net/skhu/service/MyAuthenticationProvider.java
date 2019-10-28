@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import net.skhu.domain.Professor;
 import net.skhu.domain.Student;
 import net.skhu.domain.Ta;
+import net.skhu.repository.StudentRepository;
 
 /*MyAuthenticationProvier 클래스는
  
@@ -29,6 +30,8 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	TaService taService;
 
+	@Autowired
+	StudentRepository studentRepository;
 	/* 사용자가 입력한 로그인 아이디와 비밀번호가 authenticate 메소드의 파라미터로 전달된다. */
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -41,57 +44,22 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		Student student = studentService.login(loginId, password);
 		Professor professor = professorService.login(loginId, password);
 		Ta ta = taService.login(loginId, password);
-
+		
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 		String role = "";
-		
-		if (student != null) {
+
+		if (student != null && professor == null && ta ==null) {
 			role = "ROLE_STUDENT";
-		}else if(professor != null) {
+		} else if (professor != null && student == null && ta == null ) {
 			role = "ROLE_PROFESSOR";
-		}else if(ta != null) {
+		} else if (ta != null && professor == null && student == null) {
 			role = "ROLE_TA";
-		}else {
+		}
+		
+		if (student == null && professor == null && ta == null) {
 			return null;
 		}
-//		List<Student> studentList=new ArrayList<>();
-//		List<Professor> professorList=new ArrayList<>();
-//		List<Ta> taList=new ArrayList<>();
-//		for(Object check : studentList) {
-//			if(check==student) {
-//				role = "ROLE_STUDENT";
-//				break;
-//			}
-//		}
-//		for(Object check : professorList) {
-//			if(check==professor) {
-//				role = "ROLE_PROFESSOR";
-//				break;
-//			}
-//		}
-//		for(Object check : taList) {
-//			if(check==ta) {
-//				role = "ROLE_TA";
-//				break;
-//			}
-//		}
 
-		
-
-		// switch (user.getUserType()) {
-//		case "관리자":
-//			role = "ROLE_ADMIN";
-//			break;
-//		case "교수":
-//			role = "ROLE_PROFESSOR";
-//			break;
-//		case "학생":
-//			role = "ROLE_STUDENT";
-//			break;
-//		case "TA":
-//			role = "ROLE_TA";
-//			break;
-//		}
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
 		return new MyAuthenticaion(loginId, password, grantedAuthorities, student, professor, ta);
 	}
@@ -138,6 +106,5 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		public void setTa(Ta ta) {
 			this.ta = ta;
 		}
-
 	}
 }

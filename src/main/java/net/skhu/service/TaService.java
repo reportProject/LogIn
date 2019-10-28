@@ -10,15 +10,17 @@ import net.skhu.utils.EncryptionUtils;
 @Service
 public class TaService {
 
-	@Autowired TaRepository taRepository;
-	
+	@Autowired
+	TaRepository taRepository;
+
 	public Ta login(String taId, String password) {
-		Ta ta = taRepository.findOneByTaId(taId);
-		if(ta == null) {
+		Ta ta = taRepository.findByTaId(taId);
+		if (ta == null) {
+			System.out.println("TA에 입력된 id 값은" + taId);
 			return null;
 		}
-		String pw=EncryptionUtils.encryptMD5(password);
-		if(ta.getPassword().equals(pw)==false) {
+		String pw = password;
+		if (!ta.getPassword().equals(pw)) {
 			return null;
 		}
 		return ta;

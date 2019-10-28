@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,19 +40,19 @@ public class Student {
 	String password_question;
 	String password_answer;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="department_no")
 	Department department;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "student")
+	@OneToMany(mappedBy = "student" , fetch = FetchType.LAZY)
 	List<Student_lecture> student_lectures;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "student")
+	@OneToMany(mappedBy = "student" , fetch = FetchType.LAZY)
 	List<Student_notice> student_notices;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "student")
+	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
 	List<Homework> homeworks;
 }

@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GuestController {
 
     @RequestMapping({"/", "guest/index"})
-    public String index() {
+    public String studentIndex() {
         return "guest/index"; //로그인 하지 않은 사용자를 위한 첫 페이지 URL
     }
-
+    
     @RequestMapping("guest/login")
-    public String login() {
+    public String studentLogin() {
         return "guest/login"; //로그인 페이지 UR
     }
+    
 }
 
