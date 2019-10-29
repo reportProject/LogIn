@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		.logoutRequestMatcher(new AntPathRequestMatcher("/professor/logout_processing"))
 //		.logoutSuccessUrl("/professorGuest/login")
 //		.invalidateHttpSession(true);
-//		
+		
 //		http.formLogin() // ta
 //		.loginPage("/taGuest/login")
 //		.loginProcessingUrl("/taGuest/login_processing")
