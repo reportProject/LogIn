@@ -22,6 +22,8 @@ import com.report.dto.User;
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
+	
+
 	@Autowired
 	UserService userService;
 
@@ -56,7 +58,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
 		return new MyAuthenticaion(loginId, password, grantedAuthorities, user);
 	}
-
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
