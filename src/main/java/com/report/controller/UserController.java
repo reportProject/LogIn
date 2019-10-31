@@ -8,6 +8,14 @@ public class UserController {
 
     @RequestMapping("student/studentMain")
 	public String studentMain() {
-		return "student/studentMain"; // 로그인 한 사용자를 위한 첫 페이지 URL
+		return "student/studentMain"; // 로그인 한 학생을 위한 메인 페이지 URL
+	  }
+    @RequestMapping("professor/professorMain")
+	public String professorMain() {
+		return "professor/professorMain"; // 로그인 한 교수를 위한 메인 페이지 URL
+	  }
+    @RequestMapping("ta/taMain")
+	public String taMain() {
+		return "ta/studentMain"; // 로그인 한 ta를 위한 메인 페이지 URL
 	  }
 }

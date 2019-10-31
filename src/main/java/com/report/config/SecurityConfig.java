@@ -16,7 +16,7 @@ import com.report.service.MyAuthenticationProvider;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	MyAuthenticationProvider myAuthenticationProvider;
-
+	
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers("/res/**"); 
@@ -30,10 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/student/**").hasRole("STUDENT") // /student/** 패턴의 URL은 ROLE_STUDENT 권한을 소유한 사용자만 요청할 수 있다는 설정이다.
 		.antMatchers("/ta/**").hasRole("TA") // /ta/** 패턴의 URL은 ROLE_TA 권한을 소유한 사용자만 요청할 수 있다는 설정이다.
 		.antMatchers("/guest/**").permitAll() // /guest/** 패턴의 URL은 모든 사용자에게 허용된다는 설정이다. 로그인하지 않은 사용자에게도 허용된다.
-		.antMatchers("/").permitAll() // / URL 은 모든 사용자에게 허용된다는 설정이다. 로그인하지 않은 사용자에게도 허용된다
+//		.antMatchers("/").permitAll() // / URL 은 모든 사용자에게 허용된다는 설정이다. 로그인하지 않은 사용자에게도 허용된다
 		.antMatchers("/**").authenticated(); // /** 패턴의 URL은 로그인된 사용자에게만 허용된다는 설정이다.
 		
 		http.csrf().disable(); //CSRF 공격 검사를 하지 않겠다는 설정이다.
+		
 		
 		http.formLogin() //학생
 		.loginPage("/guest/login")
@@ -48,5 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.invalidateHttpSession(true);
 		
 		http.authenticationProvider(myAuthenticationProvider);
+		
 	}
 }

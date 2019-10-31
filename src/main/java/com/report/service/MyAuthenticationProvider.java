@@ -25,6 +25,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	UserService userService;
 
+	
 	/* 사용자가 입력한 로그인 아이디와 비밀번호가 authenticate 메소드의 파라미터로 전달된다. */
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -52,6 +53,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 			break;
 		}
 
+		System.out.println(role);
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
 		return new MyAuthenticaion(loginId, password, grantedAuthorities, user);
 	}
