@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.invalidateHttpSession(true);
 		}
 		if(http.authorizeRequests().antMatchers("/professor/**").hasRole("PROFESSOR")!=null) {
-			http.formLogin() //교수
+			http.formLogin() //ta
 			.loginPage("/guest/login")
 			.loginProcessingUrl("/guest/login_processing")
 			.failureUrl("/guest/login?error")
