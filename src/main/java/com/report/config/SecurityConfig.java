@@ -34,8 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/**").authenticated(); // /** 패턴의 URL은 로그인된 사용자에게만 허용된다는 설정이다.
 		
 		http.csrf().disable(); //CSRF 공격 검사를 하지 않겠다는 설정이다.
-		
-		
+		if(http.authorizeRequests().antMatchers("/student/**").hasRole("STUDENT") != null) {
 		http.formLogin() //학생
 		.loginPage("/guest/login")
 		.loginProcessingUrl("/guest/login_processing")
@@ -47,8 +46,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.logoutRequestMatcher(new AntPathRequestMatcher("/student/logout_processing"))
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
-		
+		}
+		if(http.authorizeRequests().antMatchers("/professor/**").hasRole("PROFESSOR")!=null) {
+			http.formLogin() //교수
+			.loginPage("/guest/login")
+			.loginProcessingUrl("/guest/login_processing")
+			.failureUrl("/guest/login?error")
+			.defaultSuccessUrl("/professor/professorMain", true)
+			.usernameParameter("loginId")
+			.passwordParameter("passwd");
+			http.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/professor/logout_processing"))
+			.logoutSuccessUrl("/guest/login")
+			.invalidateHttpSession(true);
+		}
+		if(http.authorizeRequests().antMatchers("/professor/**").hasRole("PROFESSOR")!=null) {
+			http.formLogin() //교수
+			.loginPage("/guest/login")
+			.loginProcessingUrl("/guest/login_processing")
+			.failureUrl("/guest/login?error")
+			.defaultSuccessUrl("/ta/taMain", true)
+			.usernameParameter("loginId")
+			.passwordParameter("passwd");
+			http.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/ta/logout_processing"))
+			.logoutSuccessUrl("/guest/login")
+			.invalidateHttpSession(true);
+		}
 		http.authenticationProvider(myAuthenticationProvider);
 		
-	}
-}
+	}}

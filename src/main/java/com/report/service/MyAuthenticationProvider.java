@@ -53,7 +53,6 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 			break;
 		}
 
-		System.out.println(role);
 		grantedAuthorities.add(new SimpleGrantedAuthority(role));
 		return new MyAuthenticaion(loginId, password, grantedAuthorities, user);
 	}
