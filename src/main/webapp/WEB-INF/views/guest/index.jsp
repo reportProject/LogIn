@@ -31,7 +31,7 @@
 		<!-- "user/logout_processing" 부분은, 
 		SecurityConfig.java 에서 설정한, 
 		로그아웃 처리 URL과 일치해야 한다. -->
-			<a class="btn btn-default" href="logout_processing">로그아웃</a>
+			<a class="btn btn-default" href="/logout_processing">로그아웃</a>
 		</sec:authorize>
 	</div>
 </body>

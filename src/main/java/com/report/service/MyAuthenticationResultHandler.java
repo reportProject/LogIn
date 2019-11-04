@@ -50,7 +50,7 @@ public class MyAuthenticationResultHandler implements AuthenticationFailureHandl
         	break;
         case "TA" :
         	redirectStrategy.sendRedirect(request, response, "/ta/taMain");
-
+        	break;
         }
         
     }

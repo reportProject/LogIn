@@ -52,32 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .successHandler(myAuthenticationResultHandler)
         .failureHandler(myAuthenticationResultHandler);
 		http.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("logout_processing"))
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout_processing"))
 		.logoutSuccessUrl("/guest/login")
 		.invalidateHttpSession(true);
 		
-//		if (http.authorizeRequests().antMatchers("/student/**").hasRole("STUDENT") != null) {
-//			http.formLogin() // 학생
-//					.loginPage("/guest/login").loginProcessingUrl("/guest/login_processing")
-//					.failureUrl("/guest/login?error").defaultSuccessUrl("/student/studentMain", true)
-//					.usernameParameter("loginId").passwordParameter("passwd");
-//			http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/student/logout_processing"))
-//					.logoutSuccessUrl("/guest/login").invalidateHttpSession(true);
-//		}else if (http.authorizeRequests().antMatchers("/professor/**").hasRole("PROFESSOR") != null) {
-//			http.formLogin() // 교수
-//					.loginPage("/guest/login").loginProcessingUrl("/guest/login_processing")
-//					.failureUrl("/guest/login?error").defaultSuccessUrl("/professor/professorMain", true)
-//					.usernameParameter("loginId").passwordParameter("passwd");
-//			http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/professor/logout_processing"))
-//					.logoutSuccessUrl("/guest/login").invalidateHttpSession(true);
-//		}else if (http.authorizeRequests().antMatchers("/ta/**").hasRole("TA") != null) {
-//			http.formLogin() // ta
-//					.loginPage("/guest/login").loginProcessingUrl("/guest/login_processing")
-//					.failureUrl("/guest/login?error").defaultSuccessUrl("/ta/taMain", true).usernameParameter("loginId")
-//					.passwordParameter("passwd");
-//			http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/ta/logout_processing"))
-//					.logoutSuccessUrl("/guest/login").invalidateHttpSession(true);
-//		}
 		http.authenticationProvider(myAuthenticationProvider);
 
 	}
